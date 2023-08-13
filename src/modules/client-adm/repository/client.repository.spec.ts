@@ -27,8 +27,14 @@ describe("ClientRepository test", () => {
     const client = new Client({
       id: new Id("1"),
       name: "Client 1",
-      email: "x@x.com",
-      address: "Address 1",
+      document: "0000",
+      email: "client@user.com",
+      street: "some address",
+      number: "1",
+      complement: "",
+      city: "some city",
+      state: "some state",
+      zipCode: "000",
     });
 
     const repository = new ClientRepository();
@@ -40,7 +46,7 @@ describe("ClientRepository test", () => {
     expect(clientDb.id).toBe(client.id.id);
     expect(clientDb.name).toBe(client.name);
     expect(clientDb.email).toBe(client.email);
-    expect(clientDb.address).toBe(client.address);
+    expect(clientDb.city).toBe(client.city);
     expect(clientDb.createdAt).toStrictEqual(client.createdAt);
     expect(clientDb.updatedAt).toStrictEqual(client.updatedAt);
   });
@@ -49,8 +55,14 @@ describe("ClientRepository test", () => {
     const client = await ClientModel.create({
       id: "1",
       name: "Client 1",
-      email: "x@x.com",
-      address: "Address 1",
+      document: "0000",
+      email: "client@user.com",
+      street: "some address",
+      number: "1",
+      complement: "",
+      city: "some city",
+      state: "some state",
+      zipCode: "000",
       createdAt: new Date(),
       updatedAt: new Date(),
     });
@@ -61,7 +73,7 @@ describe("ClientRepository test", () => {
     expect(result.id.id).toEqual(client.id);
     expect(result.name).toEqual(client.name);
     expect(result.email).toEqual(client.email);
-    expect(result.address).toEqual(client.address);
+    expect(result.city).toEqual(client.city);
     expect(result.createdAt).toStrictEqual(client.createdAt);
     expect(result.updatedAt).toStrictEqual(client.updatedAt);
   });

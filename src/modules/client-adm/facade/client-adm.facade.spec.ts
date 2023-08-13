@@ -3,7 +3,6 @@ import ClientAdmFacadeFactory from "../factory/client-adm.facade.factory";
 import { ClientModel } from "../repository/client.model";
 import ClientRepository from "../repository/client.repository";
 import AddClientUseCase from "../usecase/add-client/add-client.usecase";
-import FindClientUseCase from "../usecase/find-client/find-client.usecase";
 import ClientAdmFacade from "./client-adm.facade";
 
 describe("ClientAdmFacade test", () => {
@@ -38,6 +37,13 @@ describe("ClientAdmFacade test", () => {
       name: "Client 1",
       email: "x@x.com",
       address: "Address 1",
+      document: "0000",
+      street: "some address",
+      number: "1",
+      complement: "",
+      city: "some city",
+      state: "some state",
+      zipCode: "000",
     };
 
     await facade.add(input);
@@ -47,7 +53,7 @@ describe("ClientAdmFacade test", () => {
     expect(client).toBeDefined();
     expect(client.name).toBe(input.name);
     expect(client.email).toBe(input.email);
-    expect(client.address).toBe(input.address);
+    expect(client.city).toBe(input.city);
   });
 
   it("should find a client", async () => {
@@ -66,6 +72,13 @@ describe("ClientAdmFacade test", () => {
       name: "Client 1",
       email: "x@x.com",
       address: "Address 1",
+      document: "0000",
+      street: "some address",
+      number: "1",
+      complement: "",
+      city: "some city",
+      state: "some state",
+      zipCode: "000",
     };
 
     await facade.add(input);
@@ -76,6 +89,10 @@ describe("ClientAdmFacade test", () => {
     expect(client.id).toBe(input.id);
     expect(client.name).toBe(input.name);
     expect(client.email).toBe(input.email);
-    expect(client.address).toBe(input.address);
+    expect(client.document).toBe(input.document);
+    expect(client.street).toBe(input.street);
+    expect(client.number).toBe(input.number);
+    expect(client.city).toBe(input.city);
+    expect(client.state).toBe(input.state);
   });
 });
