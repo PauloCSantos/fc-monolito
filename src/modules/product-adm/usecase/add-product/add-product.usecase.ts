@@ -3,7 +3,7 @@ import Product from "../../domain/product.entity";
 import ProductGateway from "../../gateway/product.gateway";
 import { AddProductInputDto, AddProductOutputDto } from "./add-product.dto";
 
-export default class AddProductUseCase {
+export  class AddProductUseCase {
   private _productRepository: ProductGateway;
 
   constructor(_productRepository: ProductGateway) {
