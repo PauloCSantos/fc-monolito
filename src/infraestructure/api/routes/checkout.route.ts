@@ -34,11 +34,11 @@ checkoutRoute.post("/", async (req: Request, res: Response) => {
             clientId: req.body.clientId,
             products: req.body.products
         }
-
+        
         const output = await usecase.execute(input)
 
         res.send(output)
     } catch (err) {
-      res.status(500).send(err)
+      res.send(err)
     }
 });

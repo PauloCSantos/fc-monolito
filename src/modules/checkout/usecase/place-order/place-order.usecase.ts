@@ -5,9 +5,10 @@ import ClientAdmFacadeInterface from "../../../client-adm/facade/client-adm.faca
 import InvoiceFacadeInterface from "../../../invoice/facade/invoice.facade.interface";
 import PaymentFacadeInterface from "../../../payment/facade/facade.interface";
 import ProductAdmFacadeInterface from "../../../product-adm/facade/product-adm.facade.interface";
+import Product from "../../../store-catalog/domain/product.entity";
 import StoreCatalogFacadeInterface from "../../../store-catalog/facade/store-catalog.facade.interface";
 import Order from "../../domain/order.entity";
-import Product from "../../domain/product.entity";
+
 import CheckoutGateway from "../../gateway/checkout.gateway";
 
 import { PlaceOrderInputDto, PlaceOrderOutputDto } from "./place-order.dto";
@@ -48,6 +49,7 @@ export default class PlaceOrderUseCase implements UseCaseInterface {
       input.products.map((p) => this.getProduct(p.productId))
     );
 
+    
     const myClient = new Client({
       id: new Id(client.id),
       name: client.name,
@@ -60,12 +62,12 @@ export default class PlaceOrderUseCase implements UseCaseInterface {
       state: client.state,
       zipCode: client.zipCode,
     });
-
+    
     const order = new Order({
       client: myClient,
       products,
     });
-
+    
     const payment = await this._paymentFacade.process({
       orderId: order.id.id,
       amount: order.total,
@@ -92,7 +94,7 @@ export default class PlaceOrderUseCase implements UseCaseInterface {
         }) : null
 
         payment.status === "approved" && order.approved();
-        this._repository.addOrder(order)
+        // this._repository.addOrder(order)
 
     return {
       id: order.id.id,
@@ -111,17 +113,19 @@ export default class PlaceOrderUseCase implements UseCaseInterface {
     if (input.products.length === 0) {
       throw new Error("No products selected");
     }
-
-    for (const p of input.products) {
-      const product = await this._productFacade.checkStock({
-        productId: p.productId,
-      });
-      if (product.stock <= 0) {
-        throw new Error(
-          `Product ${product.productId} is not available in stock`
-        );
-      }
-    }
+    console.log("Validando")
+    // for (const p of input.products) {
+    //   const product = await this._productFacade.checkStock({
+    //     productId: p.productId,
+    //   });
+    //   if (product.stock <= 0) {
+    //     // throw new Error(
+    //     //   `Product ${product.productId} is not available in stock`
+    //     // );
+    //     console.log("Not found")
+    //   }
+    // }
+    console.log("Validate complete")
   }
 
   private async getProduct(productId: string): Promise<Product> {

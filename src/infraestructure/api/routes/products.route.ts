@@ -10,9 +10,10 @@ productsRoute.post("/", async (req: Request, res: Response) => {
     let req_body = req.body;
 
     const productDto = {
+      id: req.body.id,
       name: req_body.name,
       description: req_body.description,
-      purchasePrice: req_body.price,
+      purchasePrice: req_body.purchasePrice,
       stock: req_body.stock,
     };
 
@@ -23,3 +24,4 @@ productsRoute.post("/", async (req: Request, res: Response) => {
     res.status(500).send(err);
   }
 });
+

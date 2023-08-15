@@ -2,12 +2,12 @@ import { Sequelize } from "sequelize-typescript";
 import Id from "../../@shared/domain/value-object/id.value-object";
 
 import Order from "../domain/order.entity";
-import Product from "../domain/product.entity";
 import CheckoutRepository from "./checkout.repository";
 import ClientModel from "./client.model";
 import OrderModel from "./order.model";
 import ProductModel from "./product.model";
 import Client from "../../client-adm/domain/client.entity";
+import Product from "../../store-catalog/domain/product.entity";
 
 describe("CheckoutRepository test", () => {
   let sequelize: Sequelize;

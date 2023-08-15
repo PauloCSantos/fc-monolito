@@ -23,7 +23,7 @@ describe("E2E test for client", () => {
       zipCode: "89777310",
     };
     const response = await request(app)
-      .post("/clients")
+      .post("/client")
       .send(input);
 
     expect(response.status).toBe(200);

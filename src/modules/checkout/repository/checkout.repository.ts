@@ -1,8 +1,9 @@
 import Id from "../../@shared/domain/value-object/id.value-object";
 import Client from "../../client-adm/domain/client.entity";
+import Product from "../../store-catalog/domain/product.entity";
 
 import Order from "../domain/order.entity";
-import Product from "../domain/product.entity";
+
 import CheckoutGateway from "../gateway/checkout.gateway";
 import ClientModel from "./client.model";
 import OrderModel from "./order.model";

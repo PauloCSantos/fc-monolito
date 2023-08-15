@@ -13,6 +13,9 @@ import { productsRoute } from "./routes/products.route";
 import { invoiceRoute } from "./routes/invoice.route";
 import { checkoutRoute } from "./routes/checkout.route";
 import InvoiceItemsModel from "../../modules/invoice/repository/invoice-items.model";
+import { Umzug } from "umzug";
+import { migrator } from "../config-migrations/migrator";
+import { storeCatalog } from "./routes/storeCatalog";
 
 export const app: Express = express();
 app.use(express.json());
@@ -20,6 +23,7 @@ app.use("/client", clientsRoute);
 app.use("/product", productsRoute);
 app.use("/checkout", checkoutRoute);
 app.use("/invoice", invoiceRoute);
+app.use("/store", storeCatalog)
 export let sequelize: Sequelize;
 
 async function setupDb() {
@@ -35,8 +39,13 @@ async function setupDb() {
     TransactionModel,
     InvoiceInvoiceItemsModel,
     InvoiceModel,
-    InvoiceItemsModel
+    InvoiceItemsModel,
   ]);
+
+  let migration: Umzug<any>;
+
+  migration = migrator(sequelize);
+  await migration.up();
   await sequelize.sync();
 }
 setupDb();

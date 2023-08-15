@@ -8,7 +8,7 @@ export const migrator = (
   return new Umzug({
     migrations: {
       glob: [
-        "*/test-migrations/migrations/*.{js,ts}",
+        "*/infraestructure/api/migrations/*.{js,ts}",
         {
           cwd: join(__dirname, "../../../"),
           ignore: ["**/*.d.ts", "**/index.ts", "**/index.js"],

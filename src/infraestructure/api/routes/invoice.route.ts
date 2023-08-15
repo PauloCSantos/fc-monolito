@@ -18,3 +18,29 @@ invoiceRoute.get("/:invoiceId", async (req: Request, res: Response) => {
     res.status(500).send(err);
   }
 });
+
+invoiceRoute.post("/", async (req: Request, res: Response) => {
+  const usecase = new GenerateInvoiceUseCase(new InvoiceRepository());
+
+  try {
+    const reqBody = req.body;
+
+    const invoiceDto = {
+        name: reqBody.name,
+        document: reqBody.document,
+        street: reqBody.street,
+        number: reqBody.number,
+        complement: reqBody.complement,
+        city: reqBody.city,
+        state: reqBody.state,
+        zipCode: reqBody.zipCode,
+        items: reqBody.items
+    }
+
+    const output = await usecase.execute(invoiceDto);
+
+    res.send(output);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
